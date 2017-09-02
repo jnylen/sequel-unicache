@@ -22,7 +22,7 @@ Read-Through: Queries by ID or any specified unique key, like `User[params[:id]]
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = '~> 2.1'
-  spec.add_runtime_dependency 'sequel', '~> 4.0'
+  spec.add_runtime_dependency 'sequel', '~> 4.40'
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'dalli'
