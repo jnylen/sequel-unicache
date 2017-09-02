@@ -94,11 +94,11 @@ module Sequel
           previous_changes = model.instance_variable_get :@_unicache_previous_values
           unless previous_changes.nil? || previous_changes.empty?
             origin = select_keys model, previous_changes.keys
-            model.set previous_changes
+            model.set previous_changes.tap { |hs| hs.delete(:id) }
           end
           yield
         ensure
-          model.set origin if origin
+          model.set origin.tap { |hs| hs.delete(:id) } if origin
         end
 
         def select_keys model, keys
@@ -110,7 +110,7 @@ module Sequel
         end
 
         def suspended?
-          Unicache.unicache_suspended?
+          Unicache.unicache_suspended? || false
         end
 
         def permitted? model, config

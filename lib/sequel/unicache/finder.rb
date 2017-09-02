@@ -18,7 +18,10 @@ module Sequel
           end
         end
 
-        def first_where hash
+        def find(*args, &block)
+          hash = args.first if args.is_a? Array
+          hash ||= args
+
           return primary_key_lookup hash unless hash.is_a? Hash
           if Unicache.enabled? && !Unicache.unicache_suspended? && simple_table
             config = unicache_for(*hash.keys, fuzzy: true) # need fuzzy search, this function always returns enabled config
