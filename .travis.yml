@@ -2,6 +2,7 @@ language: ruby
 before_script: "cp spec/memcache.yml.example spec/memcache.yml"
 script: "bundle exec rake test"
 rvm:
+  - 2.1.10
   - 2.2.7
   - 2.3.3
   - 2.4.1
