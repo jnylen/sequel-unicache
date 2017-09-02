@@ -11,17 +11,40 @@ module Sequel
 
       module InstanceMethods
         def after_save
-          super
-          db.after_commit{
+          db.after_commit do
             if Unicache.enabled?
               Write.expire self
               @_unicache_previous_values = nil
             end
-          }
+          end
+
+          super
         end
 
         def before_save
-          db.after_rollback{@_unicache_previous_values = nil if Unicache.enabled?}
+          db.after_rollback do
+            @_unicache_previous_values = nil if Unicache.enabled?
+          end
+
+          super
+        end
+
+        def after_destroy
+          db.after_commit do
+            if Unicache.enabled?
+              Write.expire self
+              @_unicache_previous_values = nil
+            end
+          end
+
+          super
+        end
+
+        def before_destroy
+          db.after_rollback do
+            @_unicache_previous_values = nil if Unicache.enabled?
+          end
+
           super
         end
 
