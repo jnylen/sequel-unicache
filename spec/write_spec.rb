@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Sequel::Unicache::Write do
   let!(:user_id) { User.first.id }
 

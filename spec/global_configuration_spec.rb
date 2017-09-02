@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Sequel::Unicache::GlobalConfiguration do
   it 'should be true' do
     expect(Sequel::Unicache.config).to be_kind_of Sequel::Unicache::GlobalConfiguration

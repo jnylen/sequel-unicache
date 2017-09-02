@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Sequel::Unicache::Configuration do
   before :each do
     Sequel::Unicache.configure cache: memcache, enabled: true, ttl: 120

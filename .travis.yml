@@ -2,6 +2,18 @@ language: ruby
 before_script: "cp spec/memcache.yml.example spec/memcache.yml"
 script: "bundle exec rake test"
 rvm:
-  - 2.2.0
+  - 2.2.7
+  - 2.3.3
+  - 2.4.1
+  - jruby-9.1.8.0
 services:
   - memcached
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: jruby-9.1.8.0
+branches:
+  only:
+    - master
+notifications:
+  email: false
